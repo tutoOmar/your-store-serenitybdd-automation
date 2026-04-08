@@ -40,6 +40,12 @@ public class CheckoutPage {
     public static final Target CONTINUE_BILLING_BUTTON = Target.the("continue button on billing form")
             .locatedBy("css:#button-guest");
 
+    public static final Target DELIVERY_CONTINUE_BUTTON = Target.the("continue button on delivery method")
+            .locatedBy("css:#button-shipping-method");
+
+    public static final Target PAYMENT_METHOD_RADIO = Target.the("payment method radio button")
+            .locatedBy("css:input[name='payment_method']");
+
     private CheckoutPage() {
     }
 }

@@ -10,7 +10,7 @@ import net.serenitybdd.screenplay.actions.SelectFromOptions;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static net.serenitybdd.screenplay.actions.Click.on;
 import static net.serenitybdd.screenplay.actions.Enter.theValue;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isEnabled;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.containsText;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotVisible;
 
 public class FillGuestCheckoutForm implements Task {
@@ -57,7 +57,7 @@ public class FillGuestCheckoutForm implements Task {
                 theValue(city).into(CheckoutPage.CITY_INPUT),
                 theValue(postcode).into(CheckoutPage.POSTCODE_INPUT),
                 SelectFromOptions.byVisibleText(country).from(CheckoutPage.COUNTRY_SELECT),
-                WaitUntil.the(CheckoutPage.ZONE_SELECT, isEnabled()).forNoMoreThan(10).seconds(),
+                WaitUntil.the(CheckoutPage.ZONE_SELECT, containsText(zone)).forNoMoreThan(10).seconds(),
                 SelectFromOptions.byVisibleText(zone).from(CheckoutPage.ZONE_SELECT),
                 on(CheckoutPage.CONTINUE_BILLING_BUTTON),
                 WaitUntil.the(CheckoutPage.CONTINUE_BILLING_BUTTON, isNotVisible()).forNoMoreThan(10).seconds()

@@ -12,6 +12,8 @@ Feature: Add products to cart and complete guest checkout
     Then the guest checkout form should be visible
     When he fills the form with "<firstName>", "<lastName>", "<email>", "<telephone>", "<address>", "<city>", "<postcode>", "<country>", "<zone>"
     Then the guest checkout form should not be visible
+    When he continues with the delivery method
+    Then the payment method section should be visible
 
     Examples:
       | firstName | lastName | email                   | telephone  | address    | city     | postcode | country  | zone            |

@@ -4,7 +4,9 @@ import com.yourstore.automation.questions.CartDropdownIsVisible;
 import com.yourstore.automation.questions.CartItemCount;
 import com.yourstore.automation.questions.GuestCheckoutFormVisible;
 import com.yourstore.automation.questions.IsOnCartPage;
+import com.yourstore.automation.questions.IsPaymentMethodVisible;
 import com.yourstore.automation.tasks.AddProductToCart;
+import com.yourstore.automation.tasks.ContinueDeliveryMethod;
 import com.yourstore.automation.tasks.FillGuestCheckoutForm;
 import com.yourstore.automation.tasks.OpenCartDropdown;
 import com.yourstore.automation.tasks.SelectGuestCheckout;
@@ -34,6 +36,7 @@ public class CartStepDefinitions {
     public void tearDown() {
         try {
             Serenity.getDriver().manage().deleteAllCookies();
+            Serenity.getDriver().navigate().refresh();
         } catch (Exception ignored) {
         }
     }
@@ -108,6 +111,18 @@ public class CartStepDefinitions {
     public void validateGuestFormSubmitted() {
         OnStage.theActorInTheSpotlight().should(
             seeThat(GuestCheckoutFormVisible.value(), org.hamcrest.Matchers.is(false))
+        );
+    }
+
+    @When("he continues with the delivery method")
+    public void continueDeliveryMethod() {
+        OnStage.theActorInTheSpotlight().attemptsTo(ContinueDeliveryMethod.onCheckoutPage());
+    }
+
+    @Then("the payment method section should be visible")
+    public void validatePaymentMethodVisible() {
+        OnStage.theActorInTheSpotlight().should(
+            seeThat(IsPaymentMethodVisible.value(), org.hamcrest.Matchers.is(true))
         );
     }
 }
