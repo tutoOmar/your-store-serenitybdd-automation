@@ -14,6 +14,7 @@ Feature: Add products to cart and complete guest checkout
     Then the guest checkout form should not be visible
     When he continues with the delivery method
     Then the payment method section should be visible
+    When he accepts the payment method
 
     Examples:
       | firstName | lastName | email                   | telephone  | address    | city     | postcode | country  | zone            |

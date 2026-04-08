@@ -5,6 +5,7 @@ import com.yourstore.automation.questions.CartItemCount;
 import com.yourstore.automation.questions.GuestCheckoutFormVisible;
 import com.yourstore.automation.questions.IsOnCartPage;
 import com.yourstore.automation.questions.IsPaymentMethodVisible;
+import com.yourstore.automation.tasks.AcceptPaymentAndContinue;
 import com.yourstore.automation.tasks.AddProductToCart;
 import com.yourstore.automation.tasks.ContinueDeliveryMethod;
 import com.yourstore.automation.tasks.FillGuestCheckoutForm;
@@ -124,5 +125,10 @@ public class CartStepDefinitions {
         OnStage.theActorInTheSpotlight().should(
             seeThat(IsPaymentMethodVisible.value(), org.hamcrest.Matchers.is(true))
         );
+    }
+
+    @When("he accepts the payment method")
+    public void acceptPaymentMethod() {
+        OnStage.theActorInTheSpotlight().attemptsTo(AcceptPaymentAndContinue.onCheckoutPage());
     }
 }

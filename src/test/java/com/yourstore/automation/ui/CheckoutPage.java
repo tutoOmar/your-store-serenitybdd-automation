@@ -46,6 +46,12 @@ public class CheckoutPage {
     public static final Target PAYMENT_METHOD_RADIO = Target.the("payment method radio button")
             .locatedBy("css:input[name='payment_method']");
 
+    public static final Target AGREE_CHECKBOX = Target.the("agree to terms and conditions checkbox")
+            .locatedBy("css:input[name='agree']");
+
+    public static final Target PAYMENT_CONTINUE_BUTTON = Target.the("continue button on payment method")
+            .locatedBy("css:#button-payment-method");
+
     private CheckoutPage() {
     }
 }
