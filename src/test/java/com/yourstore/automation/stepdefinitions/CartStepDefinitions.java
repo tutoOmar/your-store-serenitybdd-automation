@@ -2,8 +2,10 @@ package com.yourstore.automation.stepdefinitions;
 
 import com.yourstore.automation.questions.CartDropdownIsVisible;
 import com.yourstore.automation.questions.CartItemCount;
+import com.yourstore.automation.questions.IsOnCartPage;
 import com.yourstore.automation.tasks.AddProductToCart;
 import com.yourstore.automation.tasks.OpenCartDropdown;
+import com.yourstore.automation.tasks.ViewCart;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -47,6 +49,18 @@ public class CartStepDefinitions {
     @And("he opens the cart dropdown")
     public void openCartDropdown() {
         OnStage.theActorInTheSpotlight().attemptsTo(OpenCartDropdown.fromHeader());
+    }
+
+    @When("he clicks on view cart")
+    public void clickViewCart() {
+        OnStage.theActorInTheSpotlight().attemptsTo(ViewCart.fromDropdown());
+    }
+
+    @Then("he should be on the cart page")
+    public void validateOnCartPage() {
+        OnStage.theActorInTheSpotlight().should(
+            seeThat(IsOnCartPage.value(), org.hamcrest.Matchers.is(true))
+        );
     }
 
     @Then("the cart dropdown should be visible")

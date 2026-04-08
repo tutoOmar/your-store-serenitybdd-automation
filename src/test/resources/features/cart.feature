@@ -6,3 +6,5 @@ Feature: Add products to cart
     And he opens the cart dropdown
     Then the cart should contain 2 products
     And the cart dropdown should be visible
+    When he clicks on view cart
+    Then he should be on the cart page
