@@ -39,6 +39,7 @@ public class CartStepDefinitions {
     @After
     public void tearDown() {
         try {
+            Serenity.getDriver().navigate().to("http://opencart.abstracta.us/");
             Serenity.getDriver().manage().deleteAllCookies();
             Serenity.getDriver().navigate().refresh();
         } catch (Exception ignored) {
