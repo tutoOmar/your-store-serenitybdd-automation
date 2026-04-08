@@ -2,8 +2,10 @@ package com.yourstore.automation.tasks;
 
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
+import net.serenitybdd.screenplay.waits.WaitUntil;
 
 import static net.serenitybdd.screenplay.actions.Click.on;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
 import com.yourstore.automation.ui.HomePage;
 
@@ -29,6 +31,8 @@ public class AddProductToCart implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
-            on(HomePage.addToCartButton(index)));
+            on(HomePage.addToCartButton(index)),
+            WaitUntil.the(HomePage.SUCCESS_NOTIFICATION, isVisible()).forNoMoreThan(3).seconds()
+        );
     }
 }
