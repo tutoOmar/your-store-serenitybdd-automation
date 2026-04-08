@@ -13,6 +13,6 @@ public class IsOnCartPage implements Question<Boolean> {
     @Override
     public Boolean answeredBy(Actor actor) {
         String currentUrl = BrowseTheWeb.as(actor).getDriver().getCurrentUrl();
-        return currentUrl != null && currentUrl.contains("route=checkout/cart");
+        return currentUrl != null && currentUrl.contains("route=checkout/checkout");
     }
 }

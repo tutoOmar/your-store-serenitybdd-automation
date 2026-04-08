@@ -17,7 +17,7 @@ public class HomePage {
             .locatedBy("#cart ul.dropdown-menu");
 
     public static final Target VIEW_CART_BUTTON = Target.the("view cart button in dropdown")
-            .locatedBy("#cart ul.dropdown-menu a[href*='checkout/cart']");
+            .locatedBy("#cart ul.dropdown-menu a[href*='checkout/checkout']");
 
     public static Target addToCartButton(int index) {
         return Target.the("Add to cart button #" + index)
