@@ -1,4 +1,4 @@
-package com.yourstore.automation.userinterfaces;
+package com.yourstore.automation.ui;
 
 import net.serenitybdd.screenplay.targets.Target;
 
