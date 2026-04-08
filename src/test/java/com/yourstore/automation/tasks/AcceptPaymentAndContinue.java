@@ -20,7 +20,8 @@ public class AcceptPaymentAndContinue implements Task {
         actor.attemptsTo(
                 WaitUntil.the(CheckoutPage.AGREE_CHECKBOX, isVisible()).forNoMoreThan(10).seconds(),
                 on(CheckoutPage.AGREE_CHECKBOX),
-                on(CheckoutPage.PAYMENT_CONTINUE_BUTTON)
+                on(CheckoutPage.PAYMENT_CONTINUE_BUTTON),
+                WaitUntil.the(CheckoutPage.CONFIRM_ORDER_BUTTON, isVisible()).forNoMoreThan(15).seconds()
         );
     }
 }

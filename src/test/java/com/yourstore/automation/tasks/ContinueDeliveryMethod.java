@@ -19,7 +19,8 @@ public class ContinueDeliveryMethod implements Task {
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
                 WaitUntil.the(CheckoutPage.DELIVERY_CONTINUE_BUTTON, isVisible()).forNoMoreThan(10).seconds(),
-                on(CheckoutPage.DELIVERY_CONTINUE_BUTTON)
+                on(CheckoutPage.DELIVERY_CONTINUE_BUTTON),
+                WaitUntil.the(CheckoutPage.PAYMENT_METHOD_RADIO, isVisible()).forNoMoreThan(15).seconds()
         );
     }
 }

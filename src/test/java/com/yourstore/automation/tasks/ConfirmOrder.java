@@ -1,6 +1,7 @@
 package com.yourstore.automation.tasks;
 
 import com.yourstore.automation.ui.CheckoutPage;
+import com.yourstore.automation.ui.SuccessPage;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.waits.WaitUntil;
@@ -19,7 +20,8 @@ public class ConfirmOrder implements Task {
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
                 WaitUntil.the(CheckoutPage.CONFIRM_ORDER_BUTTON, isVisible()).forNoMoreThan(10).seconds(),
-                on(CheckoutPage.CONFIRM_ORDER_BUTTON)
+                on(CheckoutPage.CONFIRM_ORDER_BUTTON),
+                WaitUntil.the(SuccessPage.ORDER_PLACED_HEADING, isVisible()).forNoMoreThan(15).seconds()
         );
     }
 }
