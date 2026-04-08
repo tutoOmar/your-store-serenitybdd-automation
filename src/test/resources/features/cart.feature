@@ -8,3 +8,5 @@ Feature: Add products to cart
     And the cart dropdown should be visible
     When he clicks on view cart
     Then he should be on the cart page
+    When he proceeds as guest checkout
+    Then the guest checkout form should be visible

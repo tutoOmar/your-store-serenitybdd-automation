@@ -2,9 +2,11 @@ package com.yourstore.automation.stepdefinitions;
 
 import com.yourstore.automation.questions.CartDropdownIsVisible;
 import com.yourstore.automation.questions.CartItemCount;
+import com.yourstore.automation.questions.GuestCheckoutFormVisible;
 import com.yourstore.automation.questions.IsOnCartPage;
 import com.yourstore.automation.tasks.AddProductToCart;
 import com.yourstore.automation.tasks.OpenCartDropdown;
+import com.yourstore.automation.tasks.SelectGuestCheckout;
 import com.yourstore.automation.tasks.ViewCart;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -60,6 +62,18 @@ public class CartStepDefinitions {
     public void validateOnCartPage() {
         OnStage.theActorInTheSpotlight().should(
             seeThat(IsOnCartPage.value(), org.hamcrest.Matchers.is(true))
+        );
+    }
+
+    @When("he proceeds as guest checkout")
+    public void proceedAsGuest() {
+        OnStage.theActorInTheSpotlight().attemptsTo(SelectGuestCheckout.onCheckoutPage());
+    }
+
+    @Then("the guest checkout form should be visible")
+    public void validateGuestCheckoutForm() {
+        OnStage.theActorInTheSpotlight().should(
+            seeThat(GuestCheckoutFormVisible.value(), org.hamcrest.Matchers.is(true))
         );
     }
 
