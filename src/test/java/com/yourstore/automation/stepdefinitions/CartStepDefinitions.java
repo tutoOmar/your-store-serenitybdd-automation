@@ -2,11 +2,14 @@ package com.yourstore.automation.stepdefinitions;
 
 import com.yourstore.automation.questions.CartDropdownIsVisible;
 import com.yourstore.automation.questions.CartItemCount;
+import com.yourstore.automation.questions.IsConfirmOrderVisible;
 import com.yourstore.automation.questions.GuestCheckoutFormVisible;
 import com.yourstore.automation.questions.IsOnCartPage;
+import com.yourstore.automation.questions.IsOnSuccessPage;
 import com.yourstore.automation.questions.IsPaymentMethodVisible;
 import com.yourstore.automation.tasks.AcceptPaymentAndContinue;
 import com.yourstore.automation.tasks.AddProductToCart;
+import com.yourstore.automation.tasks.ConfirmOrder;
 import com.yourstore.automation.tasks.ContinueDeliveryMethod;
 import com.yourstore.automation.tasks.FillGuestCheckoutForm;
 import com.yourstore.automation.tasks.OpenCartDropdown;
@@ -130,5 +133,24 @@ public class CartStepDefinitions {
     @When("he accepts the payment method")
     public void acceptPaymentMethod() {
         OnStage.theActorInTheSpotlight().attemptsTo(AcceptPaymentAndContinue.onCheckoutPage());
+    }
+
+    @Then("the confirm order section should be visible")
+    public void validateConfirmOrderVisible() {
+        OnStage.theActorInTheSpotlight().should(
+            seeThat(IsConfirmOrderVisible.value(), org.hamcrest.Matchers.is(true))
+        );
+    }
+
+    @When("he confirms the order")
+    public void confirmOrder() {
+        OnStage.theActorInTheSpotlight().attemptsTo(ConfirmOrder.onCheckoutPage());
+    }
+
+    @Then("he should be on the success page")
+    public void validateOnSuccessPage() {
+        OnStage.theActorInTheSpotlight().should(
+            seeThat(IsOnSuccessPage.value(), org.hamcrest.Matchers.is(true))
+        );
     }
 }

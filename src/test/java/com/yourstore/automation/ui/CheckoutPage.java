@@ -52,6 +52,9 @@ public class CheckoutPage {
     public static final Target PAYMENT_CONTINUE_BUTTON = Target.the("continue button on payment method")
             .locatedBy("css:#button-payment-method");
 
+    public static final Target CONFIRM_ORDER_BUTTON = Target.the("confirm order button")
+            .locatedBy("css:#button-confirm");
+
     private CheckoutPage() {
     }
 }

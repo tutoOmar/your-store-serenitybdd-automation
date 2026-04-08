@@ -22,3 +22,5 @@ Feature: Add products to cart and complete guest checkout
     Examples:
       | firstName | lastName | email                   | telephone  | address    | city     | postcode | country  | zone            |
       | Juan      | Perez    | juan.perez@test.com     | 3001234567 | Calle 123  | Bogota   | 110111   | Colombia | Bogota D.C.     |
+      | Maria     | Lopez    | maria.lopez@test.com    | 3109876543 | Carrera 45 | Medellin | 050021   | Colombia | Antioquia       |
+      | Carlos    | Ramirez  | carlos.ramirez@test.com | 3205551234 | Avenida 80 | Guayaquil| 090150   | Ecuador  | Bolivar         |
