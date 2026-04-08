@@ -1,0 +1,41 @@
+1. Objetivo y alcance
+
+Automatización del flujo de compra como invitado en OpenCart: desde agregar productos al carrito hasta la confirmación del pedido.
+Ejercicio/taller usando Serenity BDD + Cucumber + Screenplay Pattern.
+
+2. Elección del framework
+Se eligió Serenity BDD con Screenplay por sus ventajas: mejor legibilidad, separación de responsabilidades (Actors, Tasks, Questions), reportes automáticos detallados.
+Ya contaban con experiencia previa en Screenplay, lo que facilitó la implementación.
+
+3. Retos técnicos encontrados
+
+a) Estado compartido entre escenarios
+El bug más significativo: restart.browser.each.scenario = false hacía que los ejemplos del Scenario Outline compartieran el mismo browser, causando fallos por estado residual del checkout anterior. Solución: navegar a la home antes de borrar cookies en el @After.
+
+b) Dependencia de datos geográficos (country/zone)
+Fue crítico no asumir que ya hay un país preseleccionado. Si el campo ya mostraba "Colombia" por ejemplo, por tal motivo se sugiere en pruebas siempre disparar el cambio de selección explícitamente, incluso si el valor ya parece estar seleccionado. Y tener en cuentas las regiones de prueba para la misma.
+
+c) Inconsistencia entre navegadores
+Los precios mostrados diferían entre Chrome y Edge en pruebas manuales del mismo flujo. Esto sugiere diferencias en cachés, cookies de sesión o comportamiento de redirección. Conclusión: definir un browser oficial para el entorno de pruebas o buscar razón de esta disparidad.
+
+d) Flujo de checkout con pasos redundantes
+El paso de "Delivery Method" no tiene opciones reales para el guest (una sola opción preseleccionada). Desde el punto de vista de QA, esto representa un paso de UX cuestionable y un candidato a mejora en el producto: ¿tiene sentido mostrar ese paso a usuarios invitados?
+
+## Instrucciones para ejecutar el proyecto
+
+Requisitos:
+- JDK 11+ instalado y `JAVA_HOME` configurado.
+- Navegador Chrome instalado.
+
+Ejecutar la suite de tests desde la raíz del proyecto:
+
+```bash
+./gradlew clean test aggregate
+```
+
+Los reportes se generan en `target/site/serenity/index.html`.
+
+Notas sobre las esperas:
+- Se usan esperas explícitas (`WaitUntil.the(...).forNoMoreThan(N).seconds()`) dentro de los `Task`.
+- Las `Question` son puras y no contienen esperas ni efectos secundarios.
+

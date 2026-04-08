@@ -1,5 +1,33 @@
-# Ignore Gradle project-specific cache directory
-.gradle
+# Build
+build/
+target/
 
-# Ignore Gradle build output directory
-build
+# Serenity reports
+target/site/
+target/serenity-reports/
+
+# Gradle
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.eclipse/
+.settings/
+.classpath
+.project
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Drivers
+drivers/
+
+# Logs
+*.log
+logs/
