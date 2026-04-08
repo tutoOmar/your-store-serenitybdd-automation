@@ -33,6 +33,7 @@ ext {
     assertj_core_version = '3.23.1'
 }
 dependencies {
+    testImplementation "net.serenity-bdd:serenity-screenplay-webdriver:$serenityVersion"
     testImplementation "net.serenity-bdd:serenity-core:${serenity_version}"
     testImplementation "net.serenity-bdd:serenity-cucumber:${serenity_version}"
     testImplementation "net.serenity-bdd:serenity-screenplay:${serenity_version}"
