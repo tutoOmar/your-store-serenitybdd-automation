@@ -1,6 +1,6 @@
 package com.yourstore.automation.stepdefinitions;
 
-import com.yourstore.automation.questions.CartHasProducts;
+import com.yourstore.automation.questions.CartItemCount;
 import com.yourstore.automation.tasks.AddProductToCart;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -11,6 +11,7 @@ import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
+import static org.hamcrest.Matchers.equalTo;
 
 public class CartStepDefinitions {
 
@@ -33,8 +34,10 @@ public class CartStepDefinitions {
         );
     }
 
-    @Then("the cart should contain products")
-    public void validateCart() {
-        OnStage.theActorInTheSpotlight().should(seeThat(CartHasProducts.value()));
+    @Then("the cart should contain {int} products")
+    public void validateCart(int expectedCount) {
+        OnStage.theActorInTheSpotlight().should(
+            seeThat(CartItemCount.value(), equalTo(expectedCount))
+        );
     }
 }
