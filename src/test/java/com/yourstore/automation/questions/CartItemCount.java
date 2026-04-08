@@ -22,10 +22,10 @@ public class CartItemCount implements Question<Integer> {
     @Override
     public Integer answeredBy(Actor actor) {
         actor.attemptsTo(
-            WaitUntil.the(CartHasProducts.CART_TOTAL, containsText("item(s)"))
+            WaitUntil.the(HomePage.CART_TOTAL, containsText("item(s)"))
                      .forNoMoreThan(5).seconds()
         );
-        String cartText = of(CartHasProducts.CART_TOTAL).answeredBy(actor);
+        String cartText = of(HomePage.CART_TOTAL).answeredBy(actor);
         Matcher matcher = ITEM_COUNT_PATTERN.matcher(cartText);
         return matcher.find() ? Integer.parseInt(matcher.group(1)) : 0;
     }
