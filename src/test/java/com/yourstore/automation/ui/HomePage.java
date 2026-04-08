@@ -10,6 +10,12 @@ public class HomePage {
     public static final Target CART_TOTAL = Target.the("cart total in header")
             .locatedBy("#cart-total");
 
+    public static final Target CART_DROPDOWN_BUTTON = Target.the("cart dropdown button in header")
+            .locatedBy("#cart > button");
+
+    public static final Target CART_DROPDOWN_MENU = Target.the("cart dropdown menu")
+            .locatedBy("#cart ul.dropdown-menu");
+
     public static Target addToCartButton(int index) {
         return Target.the("Add to cart button #" + index)
                 .locatedBy("(//button[contains(@onclick,'cart.add')])[" + index + "]");

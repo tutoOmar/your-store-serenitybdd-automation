@@ -1,8 +1,11 @@
 package com.yourstore.automation.stepdefinitions;
 
+import com.yourstore.automation.questions.CartDropdownIsVisible;
 import com.yourstore.automation.questions.CartItemCount;
 import com.yourstore.automation.tasks.AddProductToCart;
+import com.yourstore.automation.tasks.OpenCartDropdown;
 import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -38,6 +41,18 @@ public class CartStepDefinitions {
     public void validateCart(int expectedCount) {
         OnStage.theActorInTheSpotlight().should(
             seeThat(CartItemCount.value(), equalTo(expectedCount))
+        );
+    }
+
+    @And("he opens the cart dropdown")
+    public void openCartDropdown() {
+        OnStage.theActorInTheSpotlight().attemptsTo(OpenCartDropdown.fromHeader());
+    }
+
+    @Then("the cart dropdown should be visible")
+    public void validateCartDropdownIsVisible() {
+        OnStage.theActorInTheSpotlight().should(
+            seeThat(CartDropdownIsVisible.value(), org.hamcrest.Matchers.is(true))
         );
     }
 }
