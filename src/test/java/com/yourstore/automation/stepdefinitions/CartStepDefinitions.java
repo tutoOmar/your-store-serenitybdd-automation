@@ -25,9 +25,12 @@ public class CartStepDefinitions {
                 Open.url("http://opencart.abstracta.us/"));
     }
 
-    @When("he adds a product to the cart")
+    @When("he adds products to the cart")
     public void addProduct() {
-        OnStage.theActorInTheSpotlight().attemptsTo(AddProductToCart.fromHomePage());
+        OnStage.theActorInTheSpotlight().attemptsTo(
+            AddProductToCart.fromHomePage(1),
+            AddProductToCart.fromHomePage(2)
+        );
     }
 
     @Then("the cart should contain products")

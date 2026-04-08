@@ -10,19 +10,25 @@ import com.yourstore.automation.ui.HomePage;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 
 public class AddProductToCart implements Task {
-    
-    public static AddProductToCart fromHomePage() {
-        return instrumented(AddProductToCart.class);
+
+    private final int index;
+
+    public AddProductToCart(int index) {
+        this.index = index;
     }
-    
+
+    public static AddProductToCart fromHomePage(int index) {
+        return instrumented(AddProductToCart.class, index);
+    }
+
     @Override
     public String toString() {
-        return "adds a product to the cart";
+        return "adds product #" + index + " to the cart";
     }
 
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
-            on(HomePage.ADD_TO_CART_FIRST_PRODUCT));
+            on(HomePage.addToCartButton(index)));
     }
 }
