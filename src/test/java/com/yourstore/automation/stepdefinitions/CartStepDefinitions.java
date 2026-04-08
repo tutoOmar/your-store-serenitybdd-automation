@@ -5,14 +5,17 @@ import com.yourstore.automation.questions.CartItemCount;
 import com.yourstore.automation.questions.GuestCheckoutFormVisible;
 import com.yourstore.automation.questions.IsOnCartPage;
 import com.yourstore.automation.tasks.AddProductToCart;
+import com.yourstore.automation.tasks.FillGuestCheckoutForm;
 import com.yourstore.automation.tasks.OpenCartDropdown;
 import com.yourstore.automation.tasks.SelectGuestCheckout;
 import com.yourstore.automation.tasks.ViewCart;
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import net.serenitybdd.core.Serenity;
 import net.serenitybdd.screenplay.actions.Open;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
@@ -25,6 +28,14 @@ public class CartStepDefinitions {
     @Before
     public void setUpStage() {
         OnStage.setTheStage(new OnlineCast());
+    }
+
+    @After
+    public void tearDown() {
+        try {
+            Serenity.getDriver().manage().deleteAllCookies();
+        } catch (Exception ignored) {
+        }
     }
 
     @Given("the user is on the home page")
@@ -81,6 +92,22 @@ public class CartStepDefinitions {
     public void validateCartDropdownIsVisible() {
         OnStage.theActorInTheSpotlight().should(
             seeThat(CartDropdownIsVisible.value(), org.hamcrest.Matchers.is(true))
+        );
+    }
+
+    @When("he fills the form with {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}")
+    public void fillGuestForm(String firstName, String lastName, String email,
+                               String telephone, String address, String city,
+                               String postcode, String country, String zone) {
+        OnStage.theActorInTheSpotlight().attemptsTo(
+            FillGuestCheckoutForm.with(firstName, lastName, email, telephone, address, city, postcode, country, zone)
+        );
+    }
+
+    @Then("the guest checkout form should not be visible")
+    public void validateGuestFormSubmitted() {
+        OnStage.theActorInTheSpotlight().should(
+            seeThat(GuestCheckoutFormVisible.value(), org.hamcrest.Matchers.is(false))
         );
     }
 }
